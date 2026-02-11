@@ -13,8 +13,8 @@ import albumentations as A
 import json
 import platform
 
-from fire.utils import firelog
-from fire.dataaug_user import TrainDataAug, TestDataAug
+from src.utils import firelog
+from src.dataaug import TrainDataAug, TestDataAug
 
 
 ##### Common

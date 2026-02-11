@@ -6,9 +6,9 @@ import numpy as np
 import cv2
 from torchvision import transforms
 
-from fire.utils import firelog
-from fire.datatools import getDataLoader, getFileNames
-from fire.dataaug_user import TrainDataAug
+from src.utils import firelog
+from src.datatools import getDataLoader, getFileNames
+from src.dataaug import TrainDataAug
 
 
 

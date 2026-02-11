@@ -1,10 +1,10 @@
-# FireClassification: Deep Learning Image Classification for lazy humans
+# FireKitCV
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/fire717/Fire/blob/main/LICENSE) 
 ## 一、前言
-FireClassification is a deep learning Framework written in Python and used for Image Classification task, running on top of the machine learning platform Pytorch.
+FireKitCV is a deep learning Framework written in Python and used for Computer Vision tasks, include Image Classification, Object Detection, Seagmentation, etc. Running on Pytorch.
 
-Read the source code as documentation.
+
 
 ## 二、使用示例
 
@@ -70,14 +70,9 @@ Read the source code as documentation.
 
 ## 四、Update
 * 2023.9 [v1.1] 优化代码，删掉一些不用的功能，替换一些依赖库为自己实现，修复bug简化代码,修改存储路径
-* 2022.7 [v1.0] (根据这半年打比赛经验，增加一些东西，删除一些几乎不用的东西。) 增加convnext、swin transformer、半精度训练，删除mobileformer，删除日志、tensorboard（习惯用文档记录），优化readme
+* 2022.7 [v1.0] （根据最近打比赛经验，增加一些东西，删除一些几乎不用的东西。） 增加convnext、swin transformer、半精度训练，删除mobileformer，删除日志、tensorboard（习惯用文档记录），优化readme
 * 2021.8 [v0.9] 增加micronet和测试结果，增加rk3399测速
 * 2021.8 [v0.8] 增加mobileformer，加入fashion mnist数据集使用demo，方便测试各种模型，同时加入部分网络的训练结果
 
-## 五、To Do
-* 完善Readme
-* 增加使用文档
-* 彻底分离用户自定义部分的代码
-
-## 六、参考资源
+## 五、Refer
 1. [albumentations](https://github.com/albumentations-team/albumentations)

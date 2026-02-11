@@ -1,13 +1,21 @@
-# @https://github.com/fire717/Fire
 
 cfg = {
-    ### Global Set
-    "model_name": "resnet50",  
-    'GPU_ID': '0',
-    "class_number": 10,
-    "class_names": [], #str in list or [] for DIR label
 
-    "random_seed":42,
+    ### Global Set
+    'GPU_ID': '0',
+    'random_seed':42,
+
+    ### Model Setting
+    "model_name": "timm:efficientnet_b0",  
+    'pretrained':'', #local path or '' or 'default'
+    
+    "class_num": 10,
+    "class_names": [], #str in list or [] for default DIR name
+
+    "head_type": "cls",  #cls, reg, det, seg
+
+
+    
     "cfg_verbose":True,
     "num_workers":4,
 
@@ -15,7 +23,7 @@ cfg = {
     ### Train Setting
     'train_path':"./data/train",
     'val_path':"./data/val", #if '' mean use k_flod
-    'pretrained':'', #path or ''
+    
 
 
     'try_to_train_items': 0,   # 0 means all, or run part(200 e.g.) for bug test
@@ -57,9 +65,9 @@ cfg = {
 
 
     ### Test
-    'model_path':'output/exp2/best.pt',#test model
+    'model_path':'output/exp2/best.pt',
 
-    'eval_path':"./data/test",#test with label,get eval result
+    'eval_path':"./data/test",#test with label, get eval result
     'test_path':"./data/test",#test without label, just show img result
     
     'TTA':False,

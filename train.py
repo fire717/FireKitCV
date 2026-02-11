@@ -1,7 +1,7 @@
 import os,argparse
 import random
         
-from fire import initFire, FireModel, FireRunner, FireData
+from src import initFire, FireModel, FireRunner, FireData
 
 from config import cfg
 

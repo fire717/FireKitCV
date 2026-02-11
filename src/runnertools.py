@@ -3,7 +3,7 @@ import time
 import torch
 import torch.optim as optim
 
-from fire.loss import FocalLoss, CrossEntropyLoss,CrossEntropyLossV2
+from src.loss import FocalLoss, CrossEntropyLoss,CrossEntropyLossV2
 
 
 def getSchedu(schedu, optimizer):
