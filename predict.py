@@ -1,7 +1,7 @@
 import os,argparse
 import random
         
-from fire import initFire, FireModel, FireRunner, FireData
+from firelib import init_all, FireModel, FireRunner, FireData
 
 from config import cfg
 import pandas as pd
@@ -21,7 +21,7 @@ def softmax(x):
 
 def predict(cfg):
 
-    initFire(cfg)
+    init_all(cfg)
 
 
     model = FireModel(cfg)
@@ -38,7 +38,7 @@ def predict(cfg):
     runner = FireRunner(cfg, model)
 
     #print(model)
-    runner.modelLoad(cfg['model_path'])
+    runner.load_model(cfg['model_path'])
 
 
     res_dict = runner.predict(test_loader)
@@ -65,32 +65,32 @@ def predictMerge(cfg):
     
     test_loader = data.getTestDataloader()
     runner1 = FireRunner(cfg, model)
-    runner1.modelLoad('output/efficientnet-b6_e17_fold0_0.93368.pth')
+    runner1.load_model('output/efficientnet-b6_e17_fold0_0.93368.pth')
     print("load model1, start running.")
     res_dict1 = runner1.predictRaw(test_loader)
     print(len(res_dict1))
 
     test_loader = data.getTestDataloader()
     runner2 = FireRunner(cfg, model)
-    runner2.modelLoad('output/efficientnet-b6_e18_fold1_0.94537.pth')
+    runner2.load_model('output/efficientnet-b6_e18_fold1_0.94537.pth')
     print("load model2, start running.")
     res_dict2 = runner2.predictRaw(test_loader)
 
     test_loader = data.getTestDataloader()
     runner3 = FireRunner(cfg, model)
-    runner3.modelLoad('output/efficientnet-b6_e14_fold2_0.91967.pth')
+    runner3.load_model('output/efficientnet-b6_e14_fold2_0.91967.pth')
     print("load model3, start running.")
     res_dict3 = runner3.predictRaw(test_loader)
 
     test_loader = data.getTestDataloader()
     runner4 = FireRunner(cfg, model)
-    runner4.modelLoad('output/efficientnet-b6_e18_fold3_0.92239.pth')
+    runner4.load_model('output/efficientnet-b6_e18_fold3_0.92239.pth')
     print("load model4, start running.")
     res_dict4 = runner4.predictRaw(test_loader)
 
     # test_loader = data.getTestDataloader()
     # runner5 = FireRunner(cfg, model)
-    # runner5.modelLoad('output/efficientnet-b6_e17_fold0_0.93368.pth')
+    # runner5.load_model('output/efficientnet-b6_e17_fold0_0.93368.pth')
     # print("load model5, start running.")
     # res_dict5 = runner5.predictRaw(test_loader)
 

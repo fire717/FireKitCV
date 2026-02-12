@@ -4,7 +4,6 @@ opencv-python
 torch
 torchvision
 scikit-learn
-pretrainedmodels
 albumentations
 timm
 yacs

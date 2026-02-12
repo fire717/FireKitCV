@@ -1,58 +1,13 @@
 
-# import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
 ###########################  loss
 
-def labelSmooth(one_hot, label_smooth):
+def label_smoothing(one_hot, label_smooth):
     return one_hot*(1-label_smooth)+label_smooth/one_hot.shape[1]
 
-
-class CrossEntropyLossOneHot(nn.Module):
-    def __init__(self):
-        super(CrossEntropyLossOneHot, self).__init__()
-        self.log_softmax = nn.LogSoftmax(dim=-1)
-
-    def forward(self, preds, labels):
-        return torch.mean(torch.sum(-labels * self.log_softmax(preds), -1))
-
-
-class CrossEntropyLossV2(nn.Module):
-    def __init__(self, label_smooth=0, class_weight=None):
-        super().__init__()
-        self.class_weight = class_weight 
-        self.label_smooth = label_smooth
-        self.epsilon = 1e-7
-        
-    def forward(self, x, y, label_smooth=0, gamma=0, sample_weights=None, sample_weight_img_names=None):
-
-        #one_hot_label = F.one_hot(y, x.shape[1])
-        one_hot_label = y
-        if label_smooth:
-            one_hot_label = labelSmooth(one_hot_label, label_smooth)
-
-        #y_pred = F.log_softmax(x, dim=1)
-        # equal below two lines
-        y_softmax = F.softmax(x, 1)
-        #print(y_softmax)
-        y_softmax = torch.clamp(y_softmax, self.epsilon, 1.0-self.epsilon)# avoid nan
-        y_softmaxlog = torch.log(y_softmax)
-
-        # original CE loss
-        loss = -one_hot_label * y_softmaxlog
-
-        if class_weight:
-            loss = loss*self.class_weight
-
-        #focal loss gamma
-        if gamma:
-            loss = loss*((1-y_softmax)**gamma)
-
-        loss = torch.mean(torch.sum(loss, -1))
-
-        return loss
 
 
 class CrossEntropyLoss(nn.Module):
@@ -63,15 +18,11 @@ class CrossEntropyLoss(nn.Module):
         self.gamma = gamma
         self.epsilon = 1e-7
         
-    def forward(self, x, y, sample_weights=0, sample_weight_img_names=None):
-
-        one_hot_label = F.one_hot(y, x.shape[1])
+    def forward(self, x, one_hot_label, sample_weights=0, sample_weight_img_names=None):
 
         if self.label_smooth:
-            one_hot_label = labelSmooth(one_hot_label, self.label_smooth)
+            one_hot_label = label_smoothing(one_hot_label, self.label_smooth)
 
-        #y_pred = F.log_softmax(x, dim=1)
-        # equal below two lines
         y_softmax = F.softmax(x, 1)
         #print(y_softmax)
         y_softmax = torch.clamp(y_softmax, self.epsilon, 1.0-self.epsilon)# avoid nan

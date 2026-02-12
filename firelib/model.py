@@ -39,11 +39,11 @@ class FireModel(nn.Module):
 
             #print(pretrained)
             if self.cfg['pretrained'] in ['default', '']:
-                self.pretrain_model = timm.create_model(self.cfg['model_name'].replace('timm:',''), 
+                self.backbone = timm.create_model(self.cfg['model_name'].replace('timm:',''), 
                                                         in_chans=3,
                                                         features_only=features_only,
                                                         pretrained=pretrained,
-                                                        num_classes=self.cfg['class_num'],
+                                                        num_classes=self.cfg['num_classes'],
                                                         pretrained_cfg_overlay=dict(file=self.cfg['pretrained']))
   
 
@@ -60,11 +60,8 @@ class FireModel(nn.Module):
     def update_model_structure(self):
         
         if 'timm:' in self.cfg['model_name']:
-            #self.avgpool = nn.AdaptiveAvgPool2d(1)
-            # print(self.pretrain_model)
-            # bb
-            self.backbone = self.pretrain_model
-            # fc_features = self.backbone.classifier.in_features
+            pass  
+            
         else:
             raise Exception("[ERROR] Unknown model_name: ",self.cfg['model_name'])
 
@@ -78,9 +75,9 @@ class FireModel(nn.Module):
             return nn.Sequential(
                                 nn.AdaptiveAvgPool2d(1),
                                 nn.Flatten(),
-                                nn.Linear(320, self.cfg['class_num'])
+                                nn.Linear(320, self.cfg['num_classes'])
                             )
-                            
+
         else:
             raise Exception("[ERROR] Unknown head_type: ",self.cfg['head_type'])
 
@@ -88,7 +85,7 @@ class FireModel(nn.Module):
     def forward(self, img):        
 
         if 'timm:' in self.cfg['model_name']:
-            out1 = self.pretrain_model(img)
+            out1 = self.backbone(img)
             # print([x.shape for x in out1])
 
             if self.cfg['head_type'] == 'cls':

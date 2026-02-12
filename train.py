@@ -1,7 +1,7 @@
 import os,argparse
 import random
         
-from src import initFire, FireModel, FireRunner, FireData
+from firelib import init_all, FireModel, FireRunner, FireData
 
 from config import cfg
 
@@ -10,19 +10,17 @@ from config import cfg
 
 def main(cfg):
 
-    initFire(cfg)
+    init_all(cfg)
 
     model = FireModel(cfg)
 
     data = FireData(cfg)
 
-    if cfg['show_data']:
-        data.showTrainData()
-    else:  
-        train_loader, val_loader = data.getTrainValDataloader()
 
-        runner = FireRunner(cfg, model)
-        runner.train(train_loader, val_loader)
+    train_loader, val_loader = data.get_trainval_dataloader()
+
+    runner = FireRunner(cfg, model)
+    runner.train(train_loader, val_loader)
 
 
 if __name__ == '__main__':

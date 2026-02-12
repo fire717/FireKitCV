@@ -6,8 +6,7 @@ FireKitCV is a deep learning Framework written in Python and used for Computer V
 
 
 
-## 二、使用示例
-
+## 二、示例
 首先git clone本项目
 
 ### 2.1 训练
@@ -19,60 +18,39 @@ FireKitCV is a deep learning Framework written in Python and used for Computer V
 * 迁移学习，下载对应模型的预训练模型，把路径填入config.py中
 * 调整不同的模型、尺寸、优化器等等
 
-### 2.3 自定义网络结构
-依次修改fire/model.py相应代码即可。
 
-## 三、功能
-### 3.1.数据加载
-* 文件夹形式
-* csv标签形式
-* 其它自定义形式需手动修改代码
+## 三、支持
 
-### 3.2.支持网络
+### 3.1 模型
+* Resnet，Efficientnet, Swin Transformer, ConvNeXt等所有TIMM库所有模型
 
-* Resnet系列，Densenet系列，VGGnet系列等所有[pretrained-models.pytorch](https://github.com/Cadene/pretrained-models.pytorch)支持的网络
-* [Mobilenetv2](https://pytorch.org/docs/stable/torchvision/models.html?highlight=mobilenet#torchvision.models.mobilenet_v2)，[Mbilenetv3](https://github.com/kuan-wang/pytorch-mobilenet-v3)，ShuffleNetV2
-* [EfficientNet](https://github.com/lukemelas/EfficientNet-PyTorch)
-* [Swin Transformer](https://github.com/microsoft/Swin-Transformer)
-* [ConvNeXt](https://github.com/facebookresearch/ConvNeXt)
-* [TIMM库所有模型](https://github.com/huggingface/pytorch-image-models)
-
-
-
-### 3.3.优化器
+### 3.2 优化器
 * Adam  
-* SGD 
-* AdaBelief 
+* SGD
 * AdamW
+* AdamMuon
 
-### 3.4.学习率衰减
+### 3.3 学习率衰减
 * ReduceLROnPlateau
 * StepLR
 * MultiStepLR
 * SGDR
 
-### 3.5.损失函数
+### 3.4 损失函数
 * 交叉熵
 * Focalloss
 
-### 3.6.其他
+### 3.5 其他
 * Metric(acc, F1)
 * 训练日志保存
 * 交叉验证
 * 梯度裁剪
 * earlystop
 * weightdecay
-* 按文件夹设置分类标签、读取csv标签
-* 冻结/解冻 除最后的全连接层的特征层
+* 冻结
 * labelsmooth
 
- 
-
-## 四、Update
-* 2023.9 [v1.1] 优化代码，删掉一些不用的功能，替换一些依赖库为自己实现，修复bug简化代码,修改存储路径
-* 2022.7 [v1.0] （根据最近打比赛经验，增加一些东西，删除一些几乎不用的东西。） 增加convnext、swin transformer、半精度训练，删除mobileformer，删除日志、tensorboard（习惯用文档记录），优化readme
-* 2021.8 [v0.9] 增加micronet和测试结果，增加rk3399测速
-* 2021.8 [v0.8] 增加mobileformer，加入fashion mnist数据集使用demo，方便测试各种模型，同时加入部分网络的训练结果
 
 ## 五、Refer
 1. [albumentations](https://github.com/albumentations-team/albumentations)
+2. [timm](https://github.com/huggingface/pytorch-image-models)
