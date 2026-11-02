@@ -158,7 +158,7 @@ class FireRunner():
         print("[INFO] Total: ",count)
 
     def load_model(self,model_path, data_parallel=False):
-        self.model.load_state_dict(torch.load(model_path), strict=True)
+        self.model.load_state_dict(torch.load(model_path, weights_only=True), strict=True)
         
         if data_parallel:
             self.model = torch.nn.DataParallel(self.model)
